@@ -38,11 +38,11 @@ python3 -c "import mutagen; print('mutagen installed')"
 
 ```bash
 # 克隆或下载项目到本地
-git clone <your-repo-url>
+git clone <https://github.com/dxxphy/music_downloader.git>
 cd music-manager
 
 # 或者直接下载 download_music.py
-wget <your-repo-url>/download_music.py
+wget <https://github.com/dxxphy/music_downloader.git>/download_music.py
 ```
 
 ### 3. 配置快捷命令（可选）
@@ -390,8 +390,8 @@ MIT License
 
 ## 📮 联系方式
 
-- 项目地址: [GitHub](<your-repo-url>)
-- 问题反馈: [Issues](<your-repo-url>/issues)
+- 项目地址: [GitHub](<https://github.com/dxxphy/music_downloader.git>)
+- 问题反馈: [Issues](<https://github.com/dxxphy/music_downloader.git>/issues)
 
 ---
 
