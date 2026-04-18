@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
-本地音乐库自动化全能管家
-直接使用用户输入的歌名，无需复杂清理
+本地音乐库自动化全能管家 - 简化版
+特点：直接使用用户输入的歌名，支持多词艺人和大小写不敏感
 """
 import os
-import glob
-import re
 import subprocess
 try:
     from mutagen.id3 import ID3, TPE1, TIT2, TALB, ID3NoHeaderError
@@ -20,43 +18,58 @@ SONGS_FILE = os.path.expanduser("~/music_downloader/songs.txt")
 def parse_search_query(line):
     """
     解析搜索查询，提取艺人和歌曲名
-    格式: ytsearch1:艺人 歌曲名
+    支持多词艺人（Taylor Swift、The Beatles等）和大小写不敏感
     """
     line = line.strip()
     
     if not line.startswith("ytsearch1:"):
         return None, None
     
-    # 去掉 ytsearch1: 前缀
     query = line.replace("ytsearch1:", "").strip()
     
-    # 分割艺人和歌曲名（第一个空格处分割）
+    # 已知的多词艺人列表
+    multi_word_artists = [
+        "The Beatles", "Taylor Swift", "Wang Leehom", "Leehom Wang",
+        "David Tao", "Stefanie Sun", "Jay Chou", "Khalil Fong",
+        "Eason Chan", "Gary Chaw"
+    ]
+    
+    # 特殊映射（艺人的别名）
+    artist_mapping = {
+        "A Yue": "张震岳",
+        "Vae": "许嵩",
+    }
+    
+    # 检查是否匹配多词艺人（大小写不敏感）
+    query_lower = query.lower()
+    for artist in multi_word_artists:
+        if query_lower.startswith(artist.lower() + " "):
+            # 使用原始查询提取歌名，保持用户输入的大小写
+            song_name = query[len(artist):].strip()
+            return artist, song_name
+    
+    # 检查特殊映射
+    for alias, standard_name in artist_mapping.items():
+        if query_lower.startswith(alias.lower() + " "):
+            song_name = query[len(alias):].strip()
+            return standard_name, song_name
+    
+    # 默认：第一个空格分割
     parts = query.split(" ", 1)
+    if len(parts) >= 2:
+        return parts[0].strip(), parts[1].strip()
     
-    if len(parts) < 2:
-        return None, None
-    
-    artist = parts[0].strip()
-    song_name = parts[1].strip()
-    
-    return artist, song_name
+    return None, None
 
 def is_already_downloaded(artist, song_name):
-    """
-    检查歌曲是否已经下载
-    """
+    """检查歌曲是否已经下载"""
     artist_dir = os.path.join(MUSIC_DIR, artist)
     
     if not os.path.exists(artist_dir):
         return False
     
-    # 直接检查是否存在这个歌名的文件
     expected_file = os.path.join(artist_dir, f"{song_name}.mp3")
-    
-    if os.path.exists(expected_file):
-        return True
-    
-    return False
+    return os.path.exists(expected_file)
 
 def download_songs():
     """阶段一：读取 songs.txt 并下载歌曲"""
@@ -69,6 +82,7 @@ def download_songs():
         lines = f.readlines()
     
     print("🚀 阶段一：开始下载歌曲...")
+    print("💡 特点：直接使用你输入的歌名，支持多词艺人\n")
     
     downloaded_count = 0
     skipped_count = 0
@@ -86,11 +100,11 @@ def download_songs():
         
         # 检查是否已下载
         if is_already_downloaded(artist, song_name):
-            print(f"⏭️  已下载: [{artist}] - [{song_name}]，跳过")
+            print(f"⏭️  已存在: [{artist}] - [{song_name}]")
             skipped_count += 1
             continue
         
-        print(f"\n📥 正在下载: [{artist}] - [{song_name}]")
+        print(f"📥 正在下载: [{artist}] - [{song_name}]")
         
         # 创建艺人文件夹
         artist_dir = os.path.join(MUSIC_DIR, artist)
@@ -102,11 +116,11 @@ def download_songs():
         # 构建 yt-dlp 命令
         command = [
             "yt-dlp",
-            "-x",  # 只提取音频
-            "--audio-format", "mp3",  # 转为 mp3
-            "--add-metadata",  # 添加基础元数据
-            "--embed-thumbnail",  # 嵌入封面图
-            "--no-write-subs",  # 不下载字幕
+            "-x",
+            "--audio-format", "mp3",
+            "--add-metadata",
+            "--embed-thumbnail",
+            "--no-write-subs",
             "-o", output_template,
             line
         ]
@@ -116,39 +130,38 @@ def download_songs():
             result = subprocess.run(command, capture_output=True, text=True)
             
             if result.returncode == 0:
-                # 下载成功，重命名文件并设置标签
                 success = rename_and_set_tags(artist_dir, artist, song_name)
                 if success:
                     downloaded_count += 1
-                    print(f"✅ 下载完成: [{artist}] - [{song_name}]")
+                    print(f"✅ 完成: [{artist}] - [{song_name}]\n")
                 else:
-                    print(f"⚠️ 下载成功但文件处理失败")
+                    print(f"⚠️ 下载成功但文件处理失败\n")
             else:
-                print(f"❌ 下载失败: [{artist}] - [{song_name}]")
+                print(f"❌ 失败: [{artist}] - [{song_name}]")
                 if result.stderr:
-                    print(f"   错误: {result.stderr[:200]}")
+                    error_msg = result.stderr[:200].replace('\n', ' ')
+                    print(f"   错误: {error_msg}")
+                print()
         
         except Exception as e:
-            print(f"❌ 执行出错: {e}")
+            print(f"❌ 执行出错: {e}\n")
     
-    print(f"\n📊 下载统计:")
+    print(f"📊 下载统计:")
     print(f"   新下载: {downloaded_count} 首")
     print(f"   已跳过: {skipped_count} 首")
     print(f"   总计: {downloaded_count + skipped_count} 首")
 
 def rename_and_set_tags(artist_dir, artist, song_name):
-    """
-    重命名下载的文件并设置正确的标签
-    """
+    """重命名下载的文件并设置正确的标签"""
     try:
-        # 查找下载的 MP3 文件
-        mp3_files = [f for f in os.listdir(artist_dir) if f.endswith('.mp3')]
+        import glob
+        mp3_files = glob.glob(os.path.join(artist_dir, "*.mp3"))
         
         if not mp3_files:
             return False
         
         # 取最新的文件
-        mp3_files.sort(key=lambda x: os.path.getmtime(os.path.join(artist_dir, x)))
+        mp3_files.sort(key=lambda x: os.path.getmtime(x))
         latest_file = mp3_files[-1]
         
         old_path = os.path.join(artist_dir, latest_file)
@@ -164,7 +177,6 @@ def rename_and_set_tags(artist_dir, artist, song_name):
         except ID3NoHeaderError:
             audio = ID3()
         
-        # 设置标签
         audio.delall("TPE1")
         audio.delall("TIT2")
         audio.delall("TALB")
@@ -174,7 +186,6 @@ def rename_and_set_tags(artist_dir, artist, song_name):
         audio.add(TALB(encoding=3, text=f"{artist} 精选集"))
         
         audio.save(new_path)
-        
         return True
     
     except Exception as e:
@@ -183,12 +194,12 @@ def rename_and_set_tags(artist_dir, artist, song_name):
 
 def clean_extra_files():
     """阶段二：删除非 MP3 的垃圾文件"""
-    print("\n🚀 阶段二：清理垃圾文件...")
+    print("🚀 阶段二：清理垃圾文件...")
     
+    import os
     deleted_count = 0
     
     for root, dirs, files in os.walk(MUSIC_DIR):
-        # 跳过隐藏目录
         dirs[:] = [d for d in dirs if not d.startswith('.')]
         
         for filename in files:
@@ -197,24 +208,24 @@ def clean_extra_files():
                 try:
                     os.remove(filepath)
                     deleted_count += 1
-                except Exception as e:
-                    print(f"   删除失败: {filename}")
+                except Exception:
+                    pass
     
-    print(f"✅ 清理完成，删除了 {deleted_count} 个垃圾文件")
+    print(f"✅ 清理完成，删除了 {deleted_count} 个垃圾文件\n")
 
 def main():
-    print("🎵 本地音乐库自动化管家")
-    print("=" * 50)
-    print("特点：直接使用你输入的歌名，无需复杂处理")
-    print("=" * 50 + "\n")
+    print("🎵 本地音乐库自动化管家（简化版 v2.0）")
+    print("=" * 60)
+    print("特点：直接使用你输入的歌名，支持多词艺人和大小写不敏感")
+    print("=" * 60 + "\n")
     
     download_songs()
     clean_extra_files()
     
-    print("\n" + "=" * 50)
+    print("=" * 60)
     print("🎶 全部任务完成！")
     print("💡 提示：请打开 Rhythmbox 并按 Ctrl+R 刷新库")
-    print("=" * 50)
+    print("=" * 60)
 
 if __name__ == "__main__":
     main()
