@@ -15,7 +15,7 @@ except ImportError:
 
 # 设定音乐库路径
 MUSIC_DIR = os.path.expanduser("~/Music")
-SONGS_FILE = os.path.join(MUSIC_DIR, "songs.txt")
+SONGS_FILE = os.path.expanduser("~/music_downloader/songs.txt")
 
 def clean_title(raw_title, artist_name=""):
     """
