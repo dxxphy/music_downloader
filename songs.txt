@@ -1,1 +1,335 @@
-ytsearch1:artist song
+ytsearch1:Taylor Swift 22
+ytsearch1:Taylor Swift Anti Hero
+ytsearch1:Taylor Swift Blank Space
+ytsearch1:Taylor Swift I Knew You Were Trouble
+ytsearch1:Taylor Swift Love Story
+ytsearch1:Taylor Swift Shake It Off
+ytsearch1:Taylor Swift We Are Never Ever Getting Back Together
+ytsearch1:Taylor Swift You Belong With Me
+ytsearch1:The Beatles Here Comes the Sun
+ytsearch1:The Beatles Hey Jude
+ytsearch1:The Beatles In My Life
+ytsearch1:The Beatles Let It Be
+ytsearch1:The Beatles Yesterday
+ytsearch1:陶喆 Airport Take Off
+ytsearch1:陶喆 飞机场的10:30
+ytsearch1:陶喆 Airport Arrival
+ytsearch1:陶喆 爱，很简单
+ytsearch1:陶喆 沙滩
+ytsearch1:陶喆 十七岁
+ytsearch1:陶喆 望春风
+ytsearch1:陶喆 王八蛋
+ytsearch1:陶喆 是是非非
+ytsearch1:陶喆 流沙
+ytsearch1:陶喆 Take 6 Minus 3
+ytsearch1:陶喆 心乱飞
+ytsearch1:陶喆 再见以前先说再见
+ytsearch1:陶喆 沙滩 (钢琴版)
+ytsearch1:陶喆 Answering Machine
+ytsearch1:陶喆 Doxology
+ytsearch1:陶喆 找自己
+ytsearch1:陶喆 小镇姑娘
+ytsearch1:陶喆 夜来香
+ytsearch1:陶喆 普通朋友
+ytsearch1:陶喆 I’m OK
+ytsearch1:陶喆 不一样
+ytsearch1:陶喆 说走就走
+ytsearch1:陶喆 多谢你
+ytsearch1:陶喆 马戏团
+ytsearch1:陶喆 天天
+ytsearch1:陶喆 Angeline
+ytsearch1:陶喆 Amen
+ytsearch1:陶喆 黑色柳丁
+ytsearch1:陶喆 今天晚间新闻
+ytsearch1:陶喆 Dear God
+ytsearch1:陶喆 Angel
+ytsearch1:陶喆 讨厌红楼梦
+ytsearch1:陶喆 蝴蝶
+ytsearch1:陶喆 宫保鸡丁
+ytsearch1:陶喆 Melody
+ytsearch1:陶喆 月亮代表谁的心
+ytsearch1:陶喆 二十二
+ytsearch1:陶喆 My Anata
+ytsearch1:陶喆 摇篮曲
+ytsearch1:陶喆 Katrina (Demo)
+ytsearch1:陶喆 鬼
+ytsearch1:陶喆 Catherine
+ytsearch1:陶喆 就是爱你
+ytsearch1:陶喆 孙子兵法
+ytsearch1:陶喆 爱我还是他
+ytsearch1:陶喆 Susan说
+ytsearch1:陶喆 无缘
+ytsearch1:陶喆 Sula与Lampa的寓言
+ytsearch1:陶喆 2Night·藏爱
+ytsearch1:陶喆 她的歌
+ytsearch1:陶喆 爱是个什么东西
+ytsearch1:陶喆 祷告良辰歌
+ytsearch1:陶喆 忘不了
+ytsearch1:陶喆 太美丽
+ytsearch1:陶喆 追
+ytsearch1:陶喆 那一瞬间
+ytsearch1:陶喆 Walk On
+ytsearch1:陶喆 自导自演的悲剧
+ytsearch1:陶喆 祝你幸福
+ytsearch1:陶喆 似曾相识
+ytsearch1:陶喆 今天你要嫁给我
+ytsearch1:陶喆 每一面都美
+ytsearch1:陶喆 不爱
+ytsearch1:陶喆 Olia
+ytsearch1:陶喆 暗恋
+ytsearch1:陶喆 雪豹
+ytsearch1:陶喆 我太傻
+ytsearch1:陶喆 Hello
+ytsearch1:陶喆 勿忘我
+ytsearch1:陶喆 一念之间
+ytsearch1:陶喆 逗阵兄弟
+ytsearch1:陶喆 真爱等一下
+ytsearch1:陶喆 好好说再见
+ytsearch1:陶喆 上爱唱的歌
+ytsearch1:陶喆 那个女孩
+ytsearch1:陶喆 The Promise
+ytsearch1:陶喆 因为爱
+ytsearch1:陶喆 小小的你
+ytsearch1:陶喆 All for Joy
+ytsearch1:陶喆 逗阵兄弟 (独唱版)
+ytsearch1:陶喆 今天没回家 
+ytsearch1:陶喆 Runaway
+ytsearch1:陶喆 I Believe
+ytsearch1:陶喆 流沙 (新编)
+ytsearch1:陶喆 活该
+ytsearch1:陶喆 Stupid Pop Song
+ytsearch1:陶喆 Moonchild
+ytsearch1:陶喆 星心
+ytsearch1:陶喆 一点点
+ytsearch1:陶喆 路上
+ytsearch1:陶喆 半晴天
+ytsearch1:陶喆 活该
+ytsearch1:陶喆 In the Morning
+ytsearch1:陶喆 微尘
+ytsearch1:陶喆 千言万语
+ytsearch1:陶喆 Lonely is the Night
+ytsearch1:陶喆 陪你
+ytsearch1:陶喆 让爱再继续
+ytsearch1:陶喆 全世界会唱的歌
+ytsearch1:周杰伦 可爱女人
+ytsearch1:周杰伦 完美主义
+ytsearch1:周杰伦 星晴
+ytsearch1:周杰伦 娘子
+ytsearch1:周杰伦 黑色幽默
+ytsearch1:周杰伦 龙卷风
+ytsearch1:周杰伦 反方向的钟
+ytsearch1:周杰伦 爱在西元前
+ytsearch1:周杰伦 简单爱
+ytsearch1:周杰伦 开不了口
+ytsearch1:周杰伦 对不起
+ytsearch1:周杰伦 双截棍
+ytsearch1:周杰伦 安静
+ytsearch1:周杰伦 半岛铁盒
+ytsearch1:周杰伦 暗号
+ytsearch1:周杰伦 回到过去
+ytsearch1:周杰伦 以父之名
+ytsearch1:周杰伦 晴天
+ytsearch1:周杰伦 三年二班
+ytsearch1:周杰伦 东风破
+ytsearch1:周杰伦 你听得到
+ytsearch1:周杰伦 同一种调调
+ytsearch1:周杰伦 她的睫毛
+ytsearch1:周杰伦 爱情悬崖
+ytsearch1:周杰伦 梯田
+ytsearch1:周杰伦 七里香
+ytsearch1:周杰伦 借口
+ytsearch1:周杰伦 外婆
+ytsearch1:周杰伦 搁浅
+ytsearch1:周杰伦 园游会
+ytsearch1:周杰伦 止战之殇
+ytsearch1:周杰伦 夜曲
+ytsearch1:周杰伦 发如雪
+ytsearch1:周杰伦 黑色毛衣
+ytsearch1:周杰伦 四面楚歌
+ytsearch1:周杰伦 枫
+ytsearch1:周杰伦 浪漫手机
+ytsearch1:周杰伦 麦芽糖
+ytsearch1:周杰伦 珊瑚海
+ytsearch1:周杰伦 一路向北
+ytsearch1:周杰伦 夜的第七章
+ytsearch1:周杰伦 听妈妈的话
+ytsearch1:周杰伦 千里之外
+ytsearch1:周杰伦 本草纲目
+ytsearch1:周杰伦 退后
+ytsearch1:周杰伦 红模仿
+ytsearch1:周杰伦 心雨
+ytsearch1:周杰伦 白色风车
+ytsearch1:周杰伦 迷迭香
+ytsearch1:周杰伦 菊花台
+ytsearch1:周杰伦 牛仔很忙
+ytsearch1:周杰伦 彩虹
+ytsearch1:周杰伦 青花瓷
+ytsearch1:周杰伦 阳光宅男
+ytsearch1:周杰伦 蒲公英的约定
+ytsearch1:周杰伦 我不配
+ytsearch1:周杰伦 甜甜的
+ytsearch1:周杰伦 最长的电影
+ytsearch1:周杰伦 给我一首歌的时间
+ytsearch1:周杰伦 花海
+ytsearch1:周杰伦 魔术先生
+ytsearch1:周杰伦 说好的幸福呢
+ytsearch1:周杰伦 兰亭序
+ytsearch1:周杰伦 流浪诗人
+ytsearch1:周杰伦 时光机
+ytsearch1:周杰伦 稻香
+ytsearch1:周杰伦 说了再见
+ytsearch1:周杰伦 烟花易冷
+ytsearch1:周杰伦 雨下一整晚
+ytsearch1:周杰伦 我落泪情绪零碎
+ytsearch1:周杰伦 明明就
+ytsearch1:周杰伦 比较大的大提琴
+ytsearch1:周杰伦 红尘客栈
+ytsearch1:周杰伦 大笨钟
+ytsearch1:周杰伦 手写的从前
+ytsearch1:周杰伦 一点点
+ytsearch1:周杰伦 不该
+ytsearch1:周杰伦 告白气球
+ytsearch1:周杰伦 等你下课
+ytsearch1:周杰伦 倒影
+ytsearch1:周杰伦 我是如此相信
+ytsearch1:周杰伦 蜗牛
+ytsearch1:周杰伦 轨迹
+ytsearch1:周杰伦 断了的弦
+ytsearch1:周杰伦 倒带
+ytsearch1:周杰伦 不能说的秘密
+ytsearch1:孙燕姿 神奇
+ytsearch1:孙燕姿 完美的一天
+ytsearch1:孙燕姿 The moment
+ytsearch1:孙燕姿 真的
+ytsearch1:孙燕姿 180度
+ytsearch1:孙燕姿 Honey Honey
+ytsearch1:孙燕姿 彩虹金刚
+ytsearch1:孙燕姿 克卜勒
+ytsearch1:孙燕姿 一样的夏天
+ytsearch1:孙燕姿 原来你什么都不要
+ytsearch1:孙燕姿 天使的指纹
+ytsearch1:孙燕姿 天黑黑
+ytsearch1:孙燕姿 奔
+ytsearch1:孙燕姿 开始懂了
+ytsearch1:孙燕姿 当冬夜渐暖
+ytsearch1:孙燕姿 彩虹金刚
+ytsearch1:孙燕姿 我不爱
+ytsearch1:孙燕姿 我不难过
+ytsearch1:孙燕姿 我怀念的
+ytsearch1:孙燕姿 我的爱
+ytsearch1:孙燕姿 我要的幸福
+ytsearch1:孙燕姿 日落
+ytsearch1:孙燕姿 没有人的方向
+ytsearch1:孙燕姿 漩涡
+ytsearch1:孙燕姿 爱情字典
+ytsearch1:孙燕姿 爱情证书
+ytsearch1:孙燕姿 第一天
+ytsearch1:孙燕姿 绿光
+ytsearch1:孙燕姿 超快感
+ytsearch1:孙燕姿 这一刻
+ytsearch1:孙燕姿 逃亡
+ytsearch1:孙燕姿 逆光
+ytsearch1:孙燕姿 遇见
+ytsearch1:孙燕姿 随堂测验
+ytsearch1:孙燕姿 隐形人
+ytsearch1:孙燕姿 雨天 
+ytsearch1:孙燕姿 风筝
+ytsearch1:张震岳 再见
+ytsearch1:张震岳 小宇
+ytsearch1:张震岳 爱我别走
+ytsearch1:方大同 1234567
+ytsearch1:方大同 Love Song
+ytsearch1:方大同 My Only Girl
+ytsearch1:方大同 三人游
+ytsearch1:方大同 为你写的歌
+ytsearch1:方大同 春风吹
+ytsearch1:方大同 爱爱爱
+ytsearch1:方大同 特别的人
+ytsearch1:方大同 玩乐
+ytsearch1:方大同 红豆
+ytsearch1:方大同 麦恩莉
+ytsearch1:方大同 黑白
+ytsearch1:曹格 寂寞先生
+ytsearch1:李健 假如爱有天意
+ytsearch1:李健 梦一场
+ytsearch1:李健 谢谢你
+ytsearch1:李健 春风十里不如你
+ytsearch1:李健 奇
+ytsearch1:李健 矜持
+ytsearch1:李健 贝加尔湖畔
+ytsearch1:李荣浩 不将就
+ytsearch1:李荣浩 年少有为
+ytsearch1:李荣浩 恋人
+ytsearch1:李荣浩 戒烟
+ytsearch1:李荣浩 模特
+ytsearch1:李荣浩 爸爸妈妈
+ytsearch1:李荣浩 老街
+ytsearch1:李荣浩 耳朵
+ytsearch1:王力宏 kiss goodbye
+ytsearch1:王力宏 Forever love
+ytsearch1:王力宏 爱错
+ytsearch1:王力宏 我们的歌
+ytsearch1:王力宏 需要人陪
+ytsearch1:王力宏 花田错
+ytsearch1:王力宏 你不知道的事
+ytsearch1:王力宏 唯一
+ytsearch1:王力宏 大城小爱
+ytsearch1:王力宏 心跳
+ytsearch1:王力宏 春雨里洗过的太阳
+ytsearch1:王力宏 落叶归根
+ytsearch1:王杰 忘了你忘了我
+ytsearch1:王杰 我是真的爱上你
+ytsearch1:蔡健雅 Letting Go
+ytsearch1:蔡健雅 思念
+ytsearch1:蔡健雅 红色高跟鞋
+ytsearch1:蔡健雅 达尔文
+ytsearch1:许嵩 千百度
+ytsearch1:许嵩 南山忆
+ytsearch1:许嵩 有何不可
+ytsearch1:许嵩 素颜
+ytsearch1:许嵩 幻听
+ytsearch1:许嵩 惊鸿一面
+ytsearch1:许嵩 雅俗共赏
+ytsearch1:许嵩 城府
+ytsearch1:许嵩 认错
+ytsearch1:许嵩 千百度
+ytsearch1:许嵩 你若成风
+ytsearch1:许嵩 想象之中
+ytsearch1:许嵩 拆东墙
+ytsearch1:许嵩 星座书上
+ytsearch1:许嵩 如约而至
+ytsearch1:许嵩 最佳歌手
+ytsearch1:许嵩 坏孩子
+ytsearch1:许嵩 今年勇
+ytsearch1:许嵩 微博控
+ytsearch1:许嵩 我想牵着你的手
+ytsearch1:许嵩 弹指一挥间
+ytsearch1:许嵩 我乐意
+ytsearch1:许嵩 安琪
+ytsearch1:许嵩 半城烟沙
+ytsearch1:许嵩 南山忆
+ytsearch1:许嵩 叹服
+ytsearch1:许嵩 城府
+ytsearch1:许嵩 多余的解释
+ytsearch1:许嵩 如果当时
+ytsearch1:许嵩 山水之间
+ytsearch1:许嵩 庐州月
+ytsearch1:许嵩 断桥残雪
+ytsearch1:许嵩 清明雨上
+ytsearch1:许嵩 灰色头像
+ytsearch1:许嵩 燕归巢
+ytsearch1:许嵩 玫瑰花的葬礼
+ytsearch1:许嵩 素颜
+ytsearch1:许嵩 认错
+ytsearch1:陈奕迅 K歌之王
+ytsearch1:陈奕迅 十年
+ytsearch1:陈奕迅 好久不见
+ytsearch1:陈奕迅 富士山下
+ytsearch1:陈奕迅 浮夸
+ytsearch1:陈奕迅 淘汰
+ytsearch1:陈奕迅 白玫瑰
+ytsearch1:陈奕迅 红玫瑰
+ytsearch1:陈奕迅 葡萄成熟时
+ytsearch1:陈奕迅 阴天快乐
+ytsearch1:陈奕迅 陪你度过漫长岁月
+ytsearch1:陈奕迅 单车
