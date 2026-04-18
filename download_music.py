@@ -27,17 +27,35 @@ def parse_search_query(line):
     
     query = line.replace("ytsearch1:", "").strip()
     
-    # 已知的多词艺人列表
+    # 多词艺人列表（按长度排序，避免短词被误匹配）
     multi_word_artists = [
-        "The Beatles", "Taylor Swift", "Wang Leehom", "Leehom Wang",
-        "David Tao", "Stefanie Sun", "Jay Chou", "Khalil Fong",
-        "Eason Chan", "Gary Chaw"
+        "Stefanie Sun", "Taylor Swift", "Wang Leehom", "Leehom Wang",
+        "David Tao", "Jay Chou", "Khalil Fong", "Eason Chan",
+        "Gary Chaw", "The Beatles", "G.E.M.", "Deng Ziqi",
+        "JJ Lin", "Fish Leong", "Karen Mok", "Joker Xue",
+        "Sodagreen", "Mayday", "Tanya Chua", "Li Ronghao"
     ]
     
-    # 特殊映射（艺人的别名）
+    # 艺人别名映射（别名 -> 标准中文名）
     artist_mapping = {
+        # 英文/其他名 -> 中文名
         "A Yue": "张震岳",
         "Vae": "许嵩",
+        "Eason": "陈奕迅",
+        "Yanzi": "孙燕姿",
+        "Stefanie": "孙燕姿",
+        "Leehom": "王力宏",
+        "Khalil": "方大同",
+        "G.E.M.": "邓紫棋",
+        "JJ": "林俊杰",
+        "A-Mei": "张惠妹",
+        "Hebe": "田馥甄",
+        "Joker": "薛之谦",
+        "Fish": "梁静茹",
+        "Karen": "莫文蔚",
+        "Dave": "王杰",
+        "Gary": "曹格",
+        "Tanya": "蔡健雅",
     }
     
     # 检查是否匹配多词艺人（大小写不敏感）
@@ -214,9 +232,9 @@ def clean_extra_files():
     print(f"✅ 清理完成，删除了 {deleted_count} 个垃圾文件\n")
 
 def main():
-    print("🎵 本地音乐库自动化管家（简化版 v2.0）")
+    print("🎵 本地音乐库自动化管家（简化版 v2.1）")
     print("=" * 60)
-    print("特点：直接使用你输入的歌名，支持多词艺人和大小写不敏感")
+    print("✨ 新特性：支持更多艺人别名和映射")
     print("=" * 60 + "\n")
     
     download_songs()
