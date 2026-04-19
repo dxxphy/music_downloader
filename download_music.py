@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 本地音乐库自动化全能管家 - 简化版
-特点：直接使用用户输入的歌名，支持多词艺人和大小写不敏感
+特点：
+- 直接使用用户输入的歌名，支持多词艺人和大小写不敏感
+- 搜索模式：跳过已存在的文件，适合批量下载
+- URL 模式：自动替换旧版本，适合提升音质
 """
 import os
 import subprocess
@@ -21,10 +24,10 @@ def parse_search_query(line):
     支持多词艺人（Taylor Swift、The Beatles等）和大小写不敏感
     """
     line = line.strip()
-    
+
     if not line.startswith("ytsearch1:"):
         return None, None
-    
+
     query = line.replace("ytsearch1:", "").strip()
     
     # 多词艺人列表（按长度排序，避免短词被误匹配）
@@ -76,8 +79,35 @@ def parse_search_query(line):
     parts = query.split(" ", 1)
     if len(parts) >= 2:
         return parts[0].strip(), parts[1].strip()
-    
+
     return None, None
+
+def parse_url_query(line):
+    """
+    解析 URL 格式：yturl:艺人名|歌曲名|YouTube_URL
+    返回：(artist, song_name, url) 或 (None, None, None)
+    """
+    line = line.strip()
+
+    if not line.startswith("yturl:"):
+        return None, None, None
+
+    content = line.replace("yturl:", "").strip()
+
+    # 格式：艺人名|歌曲名|URL
+    parts = content.split("|")
+    if len(parts) != 3:
+        return None, None, None
+
+    artist = parts[0].strip()
+    song_name = parts[1].strip()
+    url = parts[2].strip()
+
+    # 验证 URL
+    if not url.startswith("http"):
+        return None, None, None
+
+    return artist, song_name, url
 
 def is_already_downloaded(artist, song_name):
     """检查歌曲是否已经下载"""
@@ -89,7 +119,7 @@ def is_already_downloaded(artist, song_name):
     expected_file = os.path.join(artist_dir, f"{song_name}.mp3")
     return os.path.exists(expected_file)
 
-def download_songs():
+def download_songs(force_redownload=False):
     """阶段一：读取 songs.txt 并下载歌曲"""
     if not os.path.exists(SONGS_FILE):
         print(f"⚠️ 找不到文件: {SONGS_FILE}")
@@ -100,58 +130,94 @@ def download_songs():
         lines = f.readlines()
     
     print("🚀 阶段一：开始下载歌曲...")
-    print("💡 特点：直接使用你输入的歌名，支持多词艺人\n")
+    print("💡 特点：搜索下载跳过已存在，URL 下载自动替换旧版本\n")
     
     downloaded_count = 0
     skipped_count = 0
     
     for line in lines:
         line = line.strip()
-        if not line or not line.startswith("ytsearch1:"):
+        if not line:
             continue
-        
-        artist, song_name = parse_search_query(line)
-        
-        if not artist or not song_name:
-            print(f"⚠️ 跳过格式错误的行: {line}")
+
+        # 判断是搜索还是直接 URL
+        is_url = line.startswith("yturl:")
+        is_search = line.startswith("ytsearch1:")
+
+        if not is_url and not is_search:
             continue
-        
-        # 检查是否已下载
-        if is_already_downloaded(artist, song_name):
-            print(f"⏭️  已存在: [{artist}] - [{song_name}]")
-            skipped_count += 1
-            continue
-        
+
+        artist, song_name = None, None
+        download_source = line  # 默认使用整行
+
+        if is_url:
+            # 解析 URL 格式
+            artist, song_name, url = parse_url_query(line)
+            if not artist or not song_name:
+                print(f"⚠️ 跳过格式错误的 URL 行: {line}")
+                continue
+            download_source = url
+        else:
+            # 解析搜索格式
+            artist, song_name = parse_search_query(line)
+            if not artist or not song_name:
+                print(f"⚠️ 跳过格式错误的行: {line}")
+                continue
+
+        # URL 模式：强制重新下载（用于提升音质）
+        # 搜索模式：检查是否已下载
+        if is_url:
+            # URL 模式，删除旧文件重新下载
+            old_file = os.path.join(MUSIC_DIR, artist, f"{song_name}.mp3")
+            if os.path.exists(old_file):
+                old_size = os.path.getsize(old_file) / (1024 * 1024)
+                print(f"🔄 替换旧版本: [{artist}] - [{song_name}] (旧文件: {old_size:.2f} MB)")
+                os.remove(old_file)
+        else:
+            # 搜索模式，检查是否已下载
+            if not force_redownload and is_already_downloaded(artist, song_name):
+                print(f"⏭️  已存在: [{artist}] - [{song_name}]")
+                skipped_count += 1
+                continue
+
         print(f"📥 正在下载: [{artist}] - [{song_name}]")
-        
+
         # 创建艺人文件夹
         artist_dir = os.path.join(MUSIC_DIR, artist)
         os.makedirs(artist_dir, exist_ok=True)
-        
+
         # 构建 yt-dlp 输出路径
         output_template = os.path.join(artist_dir, "%(title)s.%(ext)s")
-        
+
         # 构建 yt-dlp 命令
         command = [
             "yt-dlp",
             "-x",
             "--audio-format", "mp3",
+            "--audio-quality", "0",  # 最佳音质
             "--add-metadata",
             "--embed-thumbnail",
             "--no-write-subs",
             "-o", output_template,
-            line
+            download_source
         ]
         
         # 执行下载
         try:
             result = subprocess.run(command, capture_output=True, text=True)
-            
+
             if result.returncode == 0:
                 success = rename_and_set_tags(artist_dir, artist, song_name)
                 if success:
                     downloaded_count += 1
-                    print(f"✅ 完成: [{artist}] - [{song_name}]\n")
+
+                    # URL 模式：显示文件大小对比
+                    if is_url:
+                        new_file = os.path.join(artist_dir, f"{song_name}.mp3")
+                        new_size = os.path.getsize(new_file) / (1024 * 1024)
+                        print(f"✅ 完成: [{artist}] - [{song_name}] ({new_size:.2f} MB)\n")
+                    else:
+                        print(f"✅ 完成: [{artist}] - [{song_name}]\n")
                 else:
                     print(f"⚠️ 下载成功但文件处理失败\n")
             else:
@@ -160,7 +226,7 @@ def download_songs():
                     error_msg = result.stderr[:200].replace('\n', ' ')
                     print(f"   错误: {error_msg}")
                 print()
-        
+
         except Exception as e:
             print(f"❌ 执行出错: {e}\n")
     
@@ -232,14 +298,25 @@ def clean_extra_files():
     print(f"✅ 清理完成，删除了 {deleted_count} 个垃圾文件\n")
 
 def main():
-    print("🎵 本地音乐库自动化管家（简化版 v2.1）")
+    import argparse
+
+    parser = argparse.ArgumentParser(description='本地音乐库自动化管家')
+    parser.add_argument('-f', '--force', action='store_true',
+                        help='强制重新下载所有歌曲（覆盖已存在的文件）')
+
+    args = parser.parse_args()
+
+    print("🎵 本地音乐库自动化管家（简化版 v2.4）")
     print("=" * 60)
-    print("✨ 新特性：支持更多艺人别名和映射")
+    if args.force:
+        print("⚠️  强制重新下载模式：将覆盖已存在的文件")
+    else:
+        print("✨ 新特性：URL 模式自动替换旧版本，无需手动删除")
     print("=" * 60 + "\n")
-    
-    download_songs()
+
+    download_songs(force_redownload=args.force)
     clean_extra_files()
-    
+
     print("=" * 60)
     print("🎶 全部任务完成！")
     print("💡 提示：请打开 Rhythmbox 并按 Ctrl+R 刷新库")
