@@ -4,15 +4,13 @@
 
 ## ✨ 核心特点
 
-- 🎯 **极简设计**: 直接使用你输入的歌名，不做任何复杂处理
 - 🤖 **智能艺人识别**: 支持 18 位艺人，包括多词艺人和别名映射
 - 🔤 **多词艺人体测**: 自动识别 Taylor Swift、The Beatles、Stefanie Sun 等
 - 🔡 **大小写不敏感**: taylor swift、TAYLOR SWIFT 都能正确识别
 - 🎭 **别名映射**: A Yue→张震岳、JJ→林俊杰、Vae→许嵩 等
 - 📁 **自动分类**: 按艺人名自动创建文件夹
 - 🏷️ **精准标签**: ID3 标签完全按照你的输入设置
-- ⚡ **断点续传**: 搜索模式跳过已下载的歌曲
-- 🔄 **音质升级**: URL 模式自动替换旧版本，无需手动删除
+- ⚡ **断点续传**: 文件存在则跳过，不重复下载
 - 🗑️ **自动清理**: 删除下载过程中的垃圾文件
 
 ## 🚀 快速开始
@@ -34,63 +32,65 @@ music-dl
 ### 基本格式
 
 ```txt
-# 搜索格式（跳过已存在）
-ytsearch1:艺人 歌曲名
+# 搜索格式
+艺人+歌曲
 
-# URL格式（自动替换旧版本）
-yturl:艺人|歌曲名|YouTube_URL
+# URL格式（指定下载源）
+艺人+歌曲+YouTube_URL
 ```
 
 ### 多词艺人示例
 
 ```txt
 # 英文欧美艺人
-ytsearch1:Taylor Swift Love Story
-ytsearch1:The Beatles Hey Jude
+Taylor Swift+Love Story
+The Beatles+Hey Jude
 
 # 华语艺人英文/罗马音名
-ytsearch1:Stefanie Sun 天黑黑
-ytsearch1:Wang Leehom 唯一
-ytsearch1:JJ Lin 江南
-ytsearch1:G.E.M. 泡沫
+Stefanie Sun+天黑黑
+Wang Leehom+唯一
+JJ Lin+江南
+G.E.M.+泡沫
 
 # 乐队
-ytsearch1:Sodagreen 小情歌
-ytsearch1:Mayday 温柔
+Sodagreen+小情歌
+Mayday+温柔
 ```
 
 ### 别名映射示例
 
 ```txt
 # 常用别名自动识别
-ytsearch1:A Yue 再见        → 自动识别为"张震岳"
-ytsearch1:Vae 庐州月        → 自动识别为"许嵩"
-ytsearch1:Eason 十年        → 自动识别为"陈奕迅"
+A Yue+再见        → 自动识别为"张震岳"
+Vae+庐州月        → 自动识别为"许嵩"
+Eason+十年        → 自动识别为"陈奕迅"
 ```
 
 ### 大小写不敏感示例
 
 ```txt
 # 以下写法全部正确
-ytsearch1:taylor swift shake it off
-ytsearch1:TAYLOR SWIFT Love Story
-ytsearch1:The Beatles Hey Jude
-ytsearch1:THE BEATLES Let It Be
+taylor swift+shake it off
+TAYLOR SWIFT+Love Story
+The Beatles+Hey Jude
+THE BEATLES+Let It Be
 ```
 
 ### 中文艺人直接输入
 
 ```txt
 # 直接使用中文歌手名
-ytsearch1:陶喆 蝴蝶
+陶喆+蝴蝶
+周杰伦+晴天
+陈奕迅+十年
 ```
 
 ### URL 模式示例
 
 ```txt
-# 提升音质：从指定 URL 下载（自动替换旧版本）
-yturl:周杰伦|晴天|https://www.youtube.com/watch?v=官方MV
-yturl:Taylor Swift|Love Story|https://www.youtube.com/watch?v=HD版本
+# 从指定 URL 下载
+周杰伦+晴天+https://www.youtube.com/watch?v=官方MV
+Taylor Swift+Love Story+https://www.youtube.com/watch?v=HD版本
 ```
 
 ## 🎤 支持的艺人（18位）
@@ -140,11 +140,12 @@ yturl:Taylor Swift|Love Story|https://www.youtube.com/watch?v=HD版本
 
 ### 智能下载模式
 ```python
-# 搜索模式：跳过已存在
-"ytsearch1:周杰伦 晴天"  → 已存在则跳过 ✅
+# 统一逻辑：只要存在就跳过
+"周杰伦+晴天"  → 已存在则跳过 ✅
+"周杰伦+晴天+URL"  → 已存在则跳过 ✅
 
-# URL模式：自动替换
-"yturl:周杰伦|晴天|URL"  → 删除旧版本重新下载 ✅
+# 强制重新下载
+python3 download_music.py -f
 ```
 
 ### 智能识别
@@ -172,8 +173,17 @@ yturl:Taylor Swift|Love Story|https://www.youtube.com/watch?v=HD版本
 
 ## 📝 更新日志
 
-### v2.4 (当前版本)
-- ✅ 新增 URL 下载格式：`yturl:艺人|歌曲|YouTube_URL`
+### v2.6 (当前版本)
+- ✅ 统一逻辑：文件存在则跳过，不重复下载，音质不好的歌需要手动删除后使用url重新下载
+
+### v2.5
+- ✅ 简化格式：艺人+歌曲 或 艺人+歌曲+URL
+- ✅ 移除 ytsearch1: 和 yturl: 前缀要求
+- ✅ 向后兼容旧格式
+- ✅ 更易编辑 txt 文件
+
+### v2.4
+- ✅ 新增 URL 下载格式
 - ✅ URL 模式自动替换旧版本，无需手动删除
 - ✅ 搜索模式跳过已存在文件
 
