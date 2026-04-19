@@ -257,7 +257,7 @@ ytsearch1:李健 春风十里不如你
 ytsearch1:李健 奇
 ytsearch1:李健 矜持
 ytsearch1:李健 贝加尔湖畔
-ytsearch1:李荣浩 不将就
+yturl:李荣浩|不将就|https://www.youtube.com/watch?v=TuiL681_ifo
 ytsearch1:李荣浩 年少有为
 ytsearch1:李荣浩 恋人
 ytsearch1:李荣浩 戒烟
