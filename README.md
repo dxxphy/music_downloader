@@ -11,7 +11,8 @@
 - 🎭 **别名映射**: A Yue→张震岳、JJ→林俊杰、Vae→许嵩 等
 - 📁 **自动分类**: 按艺人名自动创建文件夹
 - 🏷️ **精准标签**: ID3 标签完全按照你的输入设置
-- ⚡ **断点续传**: 下载前检查，自动跳过已下载的歌曲
+- ⚡ **断点续传**: 搜索模式跳过已下载的歌曲
+- 🔄 **音质升级**: URL 模式自动替换旧版本，无需手动删除
 - 🗑️ **自动清理**: 删除下载过程中的垃圾文件
 
 ## 🚀 快速开始
@@ -33,8 +34,11 @@ music-dl
 ### 基本格式
 
 ```txt
-# 标准格式
+# 搜索格式（跳过已存在）
 ytsearch1:艺人 歌曲名
+
+# URL格式（自动替换旧版本）
+yturl:艺人|歌曲名|YouTube_URL
 ```
 
 ### 多词艺人示例
@@ -62,8 +66,6 @@ ytsearch1:Mayday 温柔
 ytsearch1:A Yue 再见        → 自动识别为"张震岳"
 ytsearch1:Vae 庐州月        → 自动识别为"许嵩"
 ytsearch1:Eason 十年        → 自动识别为"陈奕迅"
-ytsearch1:JJ 江南           → 自动识别为"林俊杰"
-ytsearch1:Fish 勇气         → 自动识别为"梁静茹"
 ```
 
 ### 大小写不敏感示例
@@ -74,22 +76,21 @@ ytsearch1:taylor swift shake it off
 ytsearch1:TAYLOR SWIFT Love Story
 ytsearch1:The Beatles Hey Jude
 ytsearch1:THE BEATLES Let It Be
-ytsearch1:stefanie sun 天黑黑
-ytsearch1:STEFANIE SUN 开始懂了
 ```
 
 ### 中文艺人直接输入
 
 ```txt
 # 直接使用中文歌手名
-ytsearch1:周杰伦 晴天
-ytsearch1:陈奕迅 十年
 ytsearch1:陶喆 蝴蝶
-ytsearch1:许嵩 素颜
-ytsearch1:方大同 Love Song
-ytsearch1:张震岳 再见
-ytsearch1:林俊杰 江南
-ytsearch1:邓紫棋 泡沫
+```
+
+### URL 模式示例
+
+```txt
+# 提升音质：从指定 URL 下载（自动替换旧版本）
+yturl:周杰伦|晴天|https://www.youtube.com/watch?v=官方MV
+yturl:Taylor Swift|Love Story|https://www.youtube.com/watch?v=HD版本
 ```
 
 ## 🎤 支持的艺人（18位）
@@ -137,6 +138,15 @@ ytsearch1:邓紫棋 泡沫
 文件名:    "南山憶.mp3"  ✅ 保留用户输入
 ```
 
+### 智能下载模式
+```python
+# 搜索模式：跳过已存在
+"ytsearch1:周杰伦 晴天"  → 已存在则跳过 ✅
+
+# URL模式：自动替换
+"yturl:周杰伦|晴天|URL"  → 删除旧版本重新下载 ✅
+```
+
 ### 智能识别
 
 ```python
@@ -159,16 +169,15 @@ ytsearch1:邓紫棋 泡沫
 "JJ Lin"           → "林俊杰"      ✅（文件夹名）
 ```
 
-## 🎶 刷新音乐播放器
-
-```bash
-rhythmbox
-# 按 Ctrl+R 刷新
-```
 
 ## 📝 更新日志
 
-### v2.1 (当前版本)
+### v2.4 (当前版本)
+- ✅ 新增 URL 下载格式：`yturl:艺人|歌曲|YouTube_URL`
+- ✅ URL 模式自动替换旧版本，无需手动删除
+- ✅ 搜索模式跳过已存在文件
+
+### v2.1
 - ✅ 扩展支持 18位艺人
 - ✅ 新增艺人别名映射系统（16个别名）
 - ✅ 完善多词艺人识别
