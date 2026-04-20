@@ -304,7 +304,6 @@ def main():
 
     print("=" * 60)
     print("🎶 全部任务完成！")
-    print("💡 提示：请打开 Rhythmbox 并按 Ctrl+R 刷新库")
     print("=" * 60)
 
 if __name__ == "__main__":
