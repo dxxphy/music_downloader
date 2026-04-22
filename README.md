@@ -11,6 +11,8 @@
 - 📁 **自动分类**: 按艺人名自动创建文件夹
 - 🏷️ **精准标签**: ID3 标签完全按照你的输入设置
 - ⚡ **断点续传**: 文件存在则跳过，不重复下载
+- ⏱️ **智能延迟**: 自动避免 YouTube 请求限制
+- 🔄 **自动重试**: 遇到错误时智能重试
 - 🗑️ **自动清理**: 删除下载过程中的垃圾文件
 
 ## 🚀 快速开始
@@ -91,6 +93,11 @@ THE BEATLES+Let It Be
 # 从指定 URL 下载
 周杰伦+晴天+https://www.youtube.com/watch?v=官方MV
 Taylor Swift+Love Story+https://www.youtube.com/watch?v=HD版本
+
+# 脚本会自动：
+# - 添加延迟避免 YouTube 限制
+# - 遇到错误时自动重试
+# - 只下载单个视频（忽略播放列表）
 ```
 
 ## 🎤 支持的艺人（18位）
@@ -148,33 +155,24 @@ Taylor Swift+Love Story+https://www.youtube.com/watch?v=HD版本
 python3 download_music.py -f
 ```
 
-### 智能识别
-
+### 错误处理机制
 ```python
-# 多词艺人识别（大小写不敏感）
-"taylor swift"     → "Taylor Swift" ✅
-"TAYLOR SWIFT"     → "Taylor Swift" ✅
-"stefanie sun"     → "Stefanie Sun" ✅
-"THE BEATLES"      → "The Beatles" ✅
+# YouTube 限制处理
+遇到 429 错误 → 自动等待 30-60 秒重试
 
-# 别名映射
-"A Yue"            → "张震岳"      ✅
-"Vae"              → "许嵩"        ✅
-"JJ"               → "林俊杰"      ✅
-"Eason"            → "陈奕迅"      ✅
-"Fish"             → "梁静茹"      ✅
-
-# 罗马音/英文名识别
-"Stefanie Sun"     → "孙燕姿"      ✅（文件夹名）
-"Wang Leehom"      → "王力宏"      ✅（文件夹名）
-"JJ Lin"           → "林俊杰"      ✅（文件夹名）
-```
-
+# 智能延迟机制
+每次下载间隔 → 随机 2-5 秒
+遇到错误重试 → 最长等待 60 秒
 
 ## 📝 更新日志
 
-### v2.6 (当前版本)
-- ✅ 统一逻辑：文件存在则跳过，不重复下载，音质不好的歌需要手动删除后使用url重新下载
+### v2.7 (当前版本)
+- ✅ 修复 youtube 429 错误（短时间访问请求过多）：新增自动重试功能，遇到 429 错误自动等待并重试
+- ✅ 优化 yt-dlp 参数：添加 `--no-playlist` 避免下载整个播放列表
+- ✅ 增强错误处理：最多重试 3 次，最长等待 60 秒
+
+### v2.6
+- ✅ 统一逻辑：文件存在则跳过，不重复下载
 
 ### v2.5
 - ✅ 简化格式：艺人+歌曲 或 艺人+歌曲+URL
