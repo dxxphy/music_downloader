@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """
-本地音乐库自动化全能管家 - 简化版 v2.6
+本地音乐库自动化全能管家 - 简化版 v2.7
 特点：
 - 简化格式：艺人+歌曲 或 艺人+歌曲+URL
 - 统一逻辑：只要文件存在就跳过，不重复下载
 - 支持多词艺人、别名映射、大小写不敏感
+- 智能延迟：避免 YouTube 请求限制
+- 自动重试：遇到错误时智能重试
 """
 import os
 import subprocess
+import time
+import random
 try:
     from mutagen.id3 import ID3, TPE1, TIT2, TALB, ID3NoHeaderError
 except ImportError:
@@ -190,30 +194,64 @@ def download_songs(force_redownload=False):
             "--add-metadata",
             "--embed-thumbnail",
             "--no-write-subs",
+            "--no-playlist",  # 只下载单个视频，不下载整个播放列表
+            "--sleep-interval", "3",  # 下载之间等待3秒
+            "--max-sleep-interval", "6",  # 最大等待6秒
+            "--retries", "3",  # 失败时重试3次
             "-o", output_template,
             download_source
         ]
 
         # 执行下载
-        try:
-            result = subprocess.run(command, capture_output=True, text=True)
+        max_retries = 3
+        retry_count = 0
 
-            if result.returncode == 0:
-                success = rename_and_set_tags(artist_dir, artist, song_name)
-                if success:
-                    downloaded_count += 1
-                    print(f"✅ 完成: [{artist}] - [{song_name}]\n")
+        while retry_count < max_retries:
+            try:
+                # 如果不是第一次尝试，等待一段时间
+                if retry_count > 0:
+                    wait_time = min(30 * retry_count, 60)  # 最多等待60秒
+                    print(f"⏳ 等待 {wait_time} 秒后重试...")
+                    time.sleep(wait_time)
+
+                # 添加随机延迟，避免触发 YouTube 反爬虫
+                if retry_count == 0:
+                    delay = random.uniform(2, 5)
+                    time.sleep(delay)
+
+                result = subprocess.run(command, capture_output=True, text=True)
+
+                if result.returncode == 0:
+                    success = rename_and_set_tags(artist_dir, artist, song_name)
+                    if success:
+                        downloaded_count += 1
+                        print(f"✅ 完成: [{artist}] - [{song_name}]\n")
+                        break  # 成功，退出重试循环
+                    else:
+                        print(f"⚠️ 下载成功但文件处理失败\n")
+                        break
                 else:
-                    print(f"⚠️ 下载成功但文件处理失败\n")
-            else:
-                print(f"❌ 失败: [{artist}] - [{song_name}]")
-                if result.stderr:
-                    error_msg = result.stderr[:200].replace('\n', ' ')
-                    print(f"   错误: {error_msg}")
-                print()
+                    # 检查是否是 429 错误
+                    if "429" in result.stderr or "Too Many Requests" in result.stderr:
+                        if retry_count < max_retries - 1:
+                            print(f"⚠️  YouTube 请求限制，第 {retry_count + 1} 次重试...")
+                            retry_count += 1
+                            continue
+                        else:
+                            print(f"❌ 失败: [{artist}] - [{song_name}]")
+                            print(f"   错误: YouTube 请求限制，请稍后再试")
+                            print()
+                    else:
+                        print(f"❌ 失败: [{artist}] - [{song_name}]")
+                        if result.stderr:
+                            error_msg = result.stderr[:200].replace('\n', ' ')
+                            print(f"   错误: {error_msg}")
+                        print()
+                    break
 
-        except Exception as e:
-            print(f"❌ 执行出错: {e}\n")
+            except Exception as e:
+                print(f"❌ 执行出错: {e}\n")
+                break
 
     print(f"📊 下载统计:")
     print(f"   新下载: {downloaded_count} 首")
@@ -291,12 +329,12 @@ def main():
 
     args = parser.parse_args()
 
-    print("🎵 本地音乐库自动化管家（简化版 v2.6）")
+    print("🎵 本地音乐库自动化管家（简化版 v2.7）")
     print("=" * 60)
     if args.force:
         print("⚠️  强制重新下载模式：将覆盖已存在的文件")
     else:
-        print("✨ 新特性：简化格式，统一跳过已存在文件")
+        print("✨ 新特性：智能延迟和重试，避免 YouTube 限制")
     print("=" * 60 + "\n")
 
     download_songs(force_redownload=args.force)
